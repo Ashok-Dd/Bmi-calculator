@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style>
+        *{
+            margin: 0%;
+            padding: 0%;
+        }
+        .container{
+            background-color: rgb(41, 43, 40);
+            border: 4px solid lawngreen;
+            
+            color: whitesmoke;
+            width: 30%;
+            height: 480px;
+            margin-left: 35%;
+            text-align: center;
+            font-size: 30px;
+            margin-top: 8%;
+            font-weight: bold;
+            border-radius: 10px;
+            box-shadow: 0 0 20px lawngreen;
+        }
+        input[type="number"]{
+            width: 250px;
+            height: 30px;
+            font-size: 20px;
+            border-radius: 10px;
+        }
+
+        button{
+            width: 150px;
+            height: 30px;
+            border: 2px solid lawngreen;
+            background-color: lawngreen;
+            color: rgb(41, 43, 40);
+            border-radius: 8px;
+            font-size: large;
+            cursor: pointer;
+            transition: box-shadow 0.2s ease-in-out;
+        }
+
+        button:hover{
+            background-color: lawngreen;
+
+            box-shadow: 0 0 20px lawngreen;
+            
+        }
+        p{
+            color: red;
+            font-size: 20px;
+        }
+        h1{
+            margin-top: 20px;
+            text-align: center;
+            color: whitesmoke;
+        }
+        @media screen and (max-width : 480px) {
+            .container{
+                width: 90%;
+                margin-left: 4%;
+                margin-top: 50%;
+            }
+        }
+    </style>
+</head>
+<body bgcolor="rgb(41, 43, 40)">
+    <div class="container">
+        <br>
+        <u><h2>BMI Calculator</h2></u>
+        <br><br>
+        <label for="height">Height : </label>
+        <input type="number" id="height" min="0" required placeholder=" in cm">
+        <br><br>
+        <label for="weight">Weight : </label>
+        <input type="number" id="weight" min="0" required placeholder=" in kg">
+        <br><br>
+        <button onclick="bmi()">Calculate</button>
+        <br><br>
+        <p id="wrong"></p>
+        
+        <i><h2>BMI = </i><span id="result">____</span></h2>
+    </div>
+    <h1> <span id="condition"> </span></h1>
+    <script>
+        
+        function bmi(){
+            document.getElementById('wrong').innerHTML="";
+            let height=document.getElementById('height').value;
+            let height_in_m=height/100;
+            let weight=document.getElementById('weight').value;
+            if(height>0 && weight>0){
+            let bmi=(weight/(height_in_m*height_in_m)).toFixed(2);
+            document.getElementById('result').innerHTML=bmi;
+            check(bmi);
+        }
+        else{
+            document.getElementById('wrong').innerHTML="Please enter the correct height and weight .<br>";
+        }
+
+        
+
+        }
+
+
+
+        function check(bmi){
+        if( bmi < 15.0 ){
+            document.getElementById('condition').innerHTML="Condition : Very severely Underweight";
+        }
+        else if(bmi>15 && bmi<16){
+            document.getElementById('condition').innerHTML="Condition : Severely Underweight";
+        }
+        else if(bmi>16 && bmi<18.5){
+            document.getElementById('condition').innerHTML="Condition : Underweight";
+        }
+        else if(bmi>18.5 && bmi<25){
+            document.getElementById('condition').innerHTML="Condition : Normal (Healthy Weight)";
+        }
+        else if(bmi>25 && bmi<30){
+            document.getElementById('condition').innerHTML="Condition : Overweight";
+        }
+        else if(bmi>30 && bmi<35){
+            document.getElementById('condition').innerHTML="Condition : Obese Class I (Moderately Obese)";
+        }
+        else if(bmi>35 && bmi<40){
+            document.getElementById('condition').innerHTML="Condition : Obese Class II (Severely Obese)";
+        }
+        else if(bmi>40){
+            document.getElementById('condition').innerHTML="Condition : Obese Class III (Very Severely Obese)";
+        }
+        else{
+            document.getElementById('condition').innerHTML="Not Valid";
+        }
+        }
+
+    </script>
+</body>
+</html>
